@@ -1,0 +1,20 @@
+= Code Snippets
+
+:uri-ultisnip: https://github.com/SirVer/ultisnips
+:uri-snipmate: https://github.com/garbas/vim-snipmate
+
+Pkl-neovim provides support for code snippets. To use, ensure either {uri-ultisnip}[UltiSnips] or {uri-snipmate}[snipMate] is installed by following their install instructions.
+
+image::code-snippets.gif[Code snippets demo]
+
+== Supported Snippets
+
+cla:: Class
+fun:: Function
+fn::  Function (short)
+->::  Lambda
+ame:: amends
+ext:: extends
+imp:: import
+if::  if-else
+thr:: throw

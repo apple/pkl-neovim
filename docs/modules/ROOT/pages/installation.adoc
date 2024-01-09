@@ -1,0 +1,36 @@
+= Installation
+
+:uri-neovim: https://neovim.io
+:uri-nvim-treesitter: https://github.com/nvim-treesitter/nvim-treesitter
+:uri-vim-plug: https://github.com/junegunn/vim-plug
+
+This plugin requires {uri-neovim}[Neovim] version 0.5 or higher.
+
+Install {uri-nvim-treesitter}[nvm-treesitter] along side this plugin using your favorite plugin manager.
+
+Here is a sample `+init.vim+` file using {uri-vim-plug}[vim-plug].
+To complete the setup, you will need to run `+:PlugInstall+`, then restart neovim.
+
+[source,vim]
+----
+call plug#begin()
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'https://github.com/apple/pkl-neovim.git'
+call plug#end()
+
+" The below is required for enabling the tree-sitter syntax engine, which is used by pkl-neovim.
+lua <<EOF
+local hasConfigs, configs = pcall(require, "nvim-treesitter.configs")
+if hasConfigs then
+  configs.setup {
+    ensure_installed = "pkl",
+    highlight = {
+      enable = true,              -- false will disable the whole extension
+    },
+    indent = {
+      enable = true
+    }
+  }
+end
+EOF
+----

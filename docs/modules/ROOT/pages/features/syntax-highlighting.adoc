@@ -1,0 +1,5 @@
+= Syntax Highlighting
+
+Have your code highlighted as you type.
+
+image::syntax-highlighting.gif[Syntax highlighting demo]

@@ -1,0 +1,7 @@
+= Neovim Plugin
+
+The Neovim plugin provides language suppport for authoring Pkl files in neovim.
+
+Follow the xref:installation.adoc[installation instructions] and check out the xref:features/index.adoc[feature overview].
+
+NOTE: Standard vim is not supported because it does not support syntax highlighting via tree-sitter.

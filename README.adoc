@@ -1,0 +1,128 @@
+// Copyright © 2024 Apple Inc. and the Pkl project authors. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+= pkl-neovim
+
+:uri-nvim-treesitter: https://github.com/nvim-treesitter/nvim-treesitter
+:uri-vim-plug: https://github.com/junegunn/vim-plug
+:uri-ultisnips: https://github.com/SirVer/ultisnips
+:uri-snipmate: https://github.com/garbas/vim-snipmate
+:uri-neovim: https://neovim.io
+:uri-packer-nvim: https://github.com/wbthomason/packer.nvim
+:uri-lazy-nvim: https://github.com/folke/lazy.nvim
+
+This repository provides language support for Pkl for {uri-neovim}[neovim].
+
+Supported features:
+
+- Syntax highlighting (via {uri-nvim-treesitter}[nvim-treesitter])
+- Code folding (via {uri-nvim-treesitter}[nvim-treesitter])
+- Code snippets (via {uri-snipmate}[SnipMate] or {uri-ultisnips}[UltiSnips])
+
+== Installation
+
+This plugin requires {uri-neovim}[Neovim] version 0.5 or higher.
+
+Install {uri-nvim-treesitter}[nvm-treesitter] along side this plugin using your favorite plugin manager.
+
+=== vim-plug setup
+
+Here is a sample `+init.vim+` file using {uri-vim-plug}[vim-plug].
+To complete the setup, you will need to run `+:PlugInstall+`, then restart neovim.
+
+[source,vim]
+----
+call plug#begin()
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'https://github.com/apple/pkl-neovim.git'
+call plug#end()
+
+" The below is required for enabling the tree-sitter syntax engine, which is used by pkl-neovim.
+lua <<EOF
+local hasConfigs, configs = pcall(require, "nvim-treesitter.configs")
+if hasConfigs then
+  configs.setup {
+    ensure_installed = "pkl",
+    highlight = {
+      enable = true,              -- false will disable the whole extension
+    },
+    indent = {
+      enable = true
+    }
+  }
+end
+EOF
+----
+
+=== packer.nvim setup
+
+Here is a sample `+init.lua+` file using {uri-packer-nvim}[packer.nvim].
+To complete the setup, you will need to run `+:PackerSync+`, then restart neovim.
+
+[source,lua]
+----
+require('packer').startup(function(use)
+  -- Packer can manage itself
+  use 'wbthomason/packer.nvim'
+
+  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'} -- Treesitter syntax highlighting.
+  use {'https://github.com/apple/pkl-neovim', after = "nvim-treesitter", run = ":TSInstall! pkl"} -- Pkl syntax highlighting
+end)
+
+-- The below is required for enabling the tree-sitter syntax engine, which is used by pkl-neovim.
+-- Set up Treesitter languages.
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all", -- or "pkl" for just this plugin.
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+  },
+  indent = {
+    enable = true
+  }
+}
+----
+
+=== lazy.nvim setup
+
+Here's a sample block to add your {uri-lazy-nvim}[Lazy.nvim] configuration.
+To complete the setup, restart neovim after adding this to your setup.
+
+[source,lua]
+----
+{
+  "nvim-treesitter/nvim-treesitter",
+  build = function(_)
+    vim.cmd("TSUpdate")
+  end,
+},
+{
+  "https://github.com/apple/pkl-neovim",
+  lazy = true,
+  event = "BufReadPre *.pkl",
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter",
+  },
+  build = function()
+    vim.cmd("TSInstall! pkl")
+  end,
+}
+----
+
+=== Troubleshooting
+
+Some troubleshooting tips if the installation isn't working:
+
+* If using neovim 0.5, ensure you are using the 0.5-compat branch of the nvim-treesitter/nvim-treesitter plugin
+* Run `:TSInstall pkl` to manually install the Pkl parser.
+* If syntax highlighting doesn't work until you `:edit` the pkl file to reload it, ensure that the `pkl-neovim` plugin is configured to run after the `nvim-treesitter` plugin.

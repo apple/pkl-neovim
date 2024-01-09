@@ -1,0 +1,70 @@
+*pkl-neovim.txt*   Last change 2024 January 17
+
+        Language support for the Pkl configuration language.
+
+        https://pkl-lang.org
+
+===============================================================================
+CONTENTS                                                  *pkl-neovim-contents*
+
+  1. Features:                                   |pkl-neovim-features|
+  2. Installation:                               |pkl-neovim-installation|
+  2. Requirements:                               |pkl-neovim-requirements|
+  3. Information:                                |pkl-neovim-information|
+
+===============================================================================
+FEATURES                                                  *pkl-neovim-features*
+
+  * Syntax Highlighting
+    (via [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter))
+  * Indentation
+    (via [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter))
+  * Code folding
+    (via [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter))
+  * Snippet support (via [SnipMate](https://github.com/garbas/vim-snipmate) or
+    [UltiSnips](https://github.com/SirVer/ultisnips))
+
+
+===============================================================================
+INSTALLATION                                          *pkl-neovim-installation*
+
+  1. Install {nvim-tree-sitter/nvim-treesitter} and {pkl-neovim} using your
+     plugin manager of choice. For example, if using vim-plug, add this to
+     your `init.vim`, then run `:PlugInstall`:
+
+     >
+     call plug#begin()
+     Plug 'nvim-treesitter/nvim-treesitter'
+     Plug 'git@github.com:apple/pkl-neovim.git'
+     call plug#end()
+<
+  2. Enable tree-sitter features for Pkl in your `init.vim`. For example:
+
+     >
+     lua <<EOF
+     require'nvim-treesitter.configs'.setup {
+       ensure_installed = "pkl",
+       highlight = {
+         enable = true
+       },
+       indent = {
+         enable = true
+       }
+     }
+     EOF
+<
+
+===============================================================================
+REQUIREMENTS                                          *pkl-neovim-requirements*
+
+  * Neovim version 0.5 or higher (https://neovim.io/)
+
+===============================================================================
+INFORMATION                                            *pkl-neovim-information*
+
+Author: The Pkl team <pkl-oss@group.apple.com>
+Repo: https://github.com/apple/pkl-neovim
+
+===============================================================================
+===============================================================================
+" vim:ft=help:et:ts=2:sw=2:sts=2:norl:
