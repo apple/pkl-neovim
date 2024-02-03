@@ -34,7 +34,7 @@ Supported features:
 
 This plugin requires {uri-neovim}[Neovim] version 0.5 or higher.
 
-Install {uri-nvim-treesitter}[nvm-treesitter] along side this plugin using your favorite plugin manager.
+Install {uri-nvim-treesitter}[nvim-treesitter] along side this plugin using your favorite plugin manager.
 
 === vim-plug setup
 
