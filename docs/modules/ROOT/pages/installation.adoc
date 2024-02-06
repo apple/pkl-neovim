@@ -6,7 +6,7 @@
 
 This plugin requires {uri-neovim}[Neovim] version 0.5 or higher.
 
-Install {uri-nvim-treesitter}[nvm-treesitter] along side this plugin using your favorite plugin manager.
+Install {uri-nvim-treesitter}[nvim-treesitter] along side this plugin using your favorite plugin manager.
 
 Here is a sample `+init.vim+` file using {uri-vim-plug}[vim-plug].
 To complete the setup, you will need to run `+:PlugInstall+`, then restart neovim.
