@@ -17,7 +17,7 @@
 ; * string delimiters are considered part of the regex
 (
   ((methodCallExpr (identifier) @methodName (argumentList (slStringLiteral) @injection.content))
-    (set! injection.language "regex"))
-  (eq? @methodName "Regex"))
+    (#set! injection.language "regex"))
+  (#eq? @methodName "Regex"))
  
 ; TODO: inject markdown into doc comments
