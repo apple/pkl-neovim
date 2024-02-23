@@ -44,7 +44,15 @@
 (parameterList (typedIdentifier (identifier) @variable.parameter))
 (objectBodyParameters (typedIdentifier (identifier) @variable.parameter))
 
-(identifier) @variable
+(annotation (qualifiedIdentifier) @attribute)
+(forGenerator (typedIdentifier (identifier) @variable))
+(letExpr (typedIdentifier (identifier) @variable))
+(variableExpr (identifier) @variable)
+(importClause (identifier) @variable)
+(variableObjectLiteral (identifier) @variable)
+(propertyCallExpr (identifier) @variable)
+
+; (identifier) @variable
 
 ; Literals
 
@@ -52,7 +60,7 @@
 (slStringLiteral) @string
 (mlStringLiteral) @string
 
-(escapeSequence) @escape
+(escapeSequence) @string.escape
 
 (intLiteral) @number
 (floatLiteral) @number
@@ -100,6 +108,8 @@
 "|"  @operator.type
 "->" @operator.type
 
+"..." @punctuation
+"...?" @punctuation
 "," @punctuation.delimiter
 ":" @punctuation.delimiter
 "." @punctuation.delimiter
