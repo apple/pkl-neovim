@@ -67,15 +67,15 @@
 
 (interpolationExpr
   "\\(" @punctuation.special
-  ")" @punctuation.special) @embedded
+  ")" @punctuation.special) @none
 
 (interpolationExpr
  "\\#(" @punctuation.special
- ")" @punctuation.special) @embedded
+ ")" @punctuation.special) @none
 
 (interpolationExpr
   "\\##(" @punctuation.special
-  ")" @punctuation.special) @embedded
+  ")" @punctuation.special) @none
 
 (lineComment) @comment
 (blockComment) @comment
@@ -136,15 +136,12 @@
 "function" @keyword.function
 "hidden" @keyword
 "if" @keyword.conditional
-(importExpr "import" @module)
-(importGlobExpr "import*" @module)
 "import" @keyword.import
 "import*" @keyword.import
 "in" @keyword
 "is" @keyword
 "let" @keyword
 "local" @keyword
-(moduleExpr "module" @type.builtin)
 "module" @keyword
 "new" @keyword
 "nothing" @type.builtin
