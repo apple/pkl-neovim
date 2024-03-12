@@ -15,7 +15,7 @@
 " Fold using tree-sitter
 setlocal foldmethod=expr
 setlocal foldexpr=nvim_treesitter#foldexpr()
-autocmd FileType pkl setlocal foldmethod=manual
+set foldlevelstart=99
 
 " comment with two slashes
 setlocal commentstring=//\ %s
