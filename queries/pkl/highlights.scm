@@ -20,33 +20,29 @@
 (clazz (identifier) @type)
 (typeAlias (identifier) @type)
 ((identifier) @type
- (match? @type "^[A-Z]"))
+ (#match? @type "^[A-Z]"))
 
 (typeArgumentList
   "<" @punctuation.bracket
   ">" @punctuation.bracket)
 
-(typeParameter (identifier) @type)
-(typeAnnotation (type (qualifiedIdentifier) @type))
-(newExpr (type (qualifiedIdentifier) @type))
-
 ; Method calls
 
 (methodCallExpr
-  (identifier) @method)
+  (identifier) @function.call)
 
 ; Method definitions
 
-(classMethod (methodHeader (identifier)) @method)
-(objectMethod (methodHeader (identifier)) @method)
+(classMethod (methodHeader (identifier)) @function.method)
+(objectMethod (methodHeader (identifier)) @function.method)
 
 ; Identifiers
 
 (classProperty (identifier) @property)
 (objectProperty (identifier) @property)
 
-(parameterList (typedIdentifier (identifier) @parameter))
-(objectBodyParameters (typedIdentifier (identifier) @parameter))
+(parameterList (typedIdentifier (identifier) @variable.parameter))
+(objectBodyParameters (typedIdentifier (identifier) @variable.parameter))
 
 (annotation (qualifiedIdentifier) @attribute)
 (forGenerator (typedIdentifier (identifier) @variable))
@@ -76,19 +72,19 @@
 (interpolationExpr
  "\\#(" @punctuation.special
  ")" @punctuation.special) @none
-  
+
 (interpolationExpr
   "\\##(" @punctuation.special
   ")" @punctuation.special) @none
 
 (lineComment) @comment
 (blockComment) @comment
-(docComment) @comment
+(docComment) @comment.documentation
 
 ; Operators
 
 "??" @operator
-"@"  @attribute
+"@"  @operator
 "="  @operator
 "<"  @operator
 ">"  @operator
@@ -121,7 +117,7 @@
 
 "(" @punctuation.bracket
 ")" @punctuation.bracket
-; "[" @punctuation.bracket TODO: FIGURE OUT HOW TO REFER TO CUSTOM TOKENS
+"[" @punctuation.bracket
 "]" @punctuation.bracket
 "{" @punctuation.bracket
 "}" @punctuation.bracket
@@ -132,24 +128,20 @@
 "amends" @keyword
 "as" @keyword
 "class" @keyword
-"else" @conditional
+"else" @keyword.conditional ; TODO: fix 'else' not highlighting after 'when'
 "extends" @keyword
 "external" @keyword
 (falseLiteral) @boolean
-"for" @repeat
-"function" @keyword
+"for" @keyword.repeat
+"function" @keyword.function
 "hidden" @keyword
-"if" @conditional
-(importExpr "import" @include)
-(importGlobExpr "import*" @include)
-(importClause "import" @include)
-(importGlobClause "import*" @include)
-(importClause "as" @include)
-"in" @repeat
-"is" @keyword.operator
+"if" @keyword.conditional
+"import" @keyword.import
+"import*" @keyword.import
+"in" @keyword
+"is" @keyword
 "let" @keyword
 "local" @keyword
-(moduleExpr "module" @type.builtin)
 "module" @keyword
 "new" @keyword
 "nothing" @type.builtin
@@ -157,14 +149,14 @@
 "open" @keyword
 "out" @keyword
 (outerExpr) @variable.builtin
-"read" @function.builtin
-"read?" @function.builtin
-"read*" @function.builtin
+"read" @function.method.builtin
+"read?" @function.method.builtin
+"read*" @function.method.builtin
 "super" @variable.builtin
 (thisExpr) @variable.builtin
-"throw" @function.builtin
-"trace" @function.builtin
+"throw" @function.method.builtin
+"trace" @function.method.builtin
 (trueLiteral) @boolean
 "typealias" @keyword
 "unknown" @type.builtin
-"when" @conditional
+"when" @keyword.conditional

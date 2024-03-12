@@ -16,14 +16,19 @@
   (objectBody)
   (classBody)
   (ifExpr)
-  (mlStringLiteral) ; This isn't perfect; newlines are too indented but it's better than if omitted.
-] @indent
+  (mlStringLiteral)
+  (importClause)
+  (importGlobClause)
+] @indent.begin
+
+
+("\"\"\"") @indent.begin @indent.end ; fix for mlString's delimiter
 
 [
-  "("
-  ")"
-  "{"
   "}"
-  "if"
+  "]"
+  ")"
   "else"
-] @branch ; TODO: what does this query do?
+] @indent.branch @indent.end
+
+
