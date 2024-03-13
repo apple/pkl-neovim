@@ -13,7 +13,6 @@
 " limitations under the License.
 
 " Fold using tree-sitter
-setlocal foldmethod=expr
 setlocal foldexpr=nvim_treesitter#foldexpr()
 
 " comment with two slashes
