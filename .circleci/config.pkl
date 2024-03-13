@@ -1,4 +1,4 @@
-amends "package://pkg.pkl-lang.org/pkl-project-commons/pkl.impl.circleci@1.0.0#/PklCI.pkl"
+amends "package://pkg.pkl-lang.org/pkl-project-commons/pkl.impl.circleci@1.0.2#/PklCI.pkl"
 
 triggerDocsBuild = "release"
 
