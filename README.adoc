@@ -109,7 +109,11 @@ To complete the setup, restart neovim after adding this to your setup.
 {
   "https://github.com/apple/pkl-neovim",
   lazy = true,
-  event = "BufReadPre *.pkl",
+  event = {
+    "BufReadPre *.pkl",
+    "BufReadPre *.pcf",
+    "BufReadPre PklProject",
+  },
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
   },
