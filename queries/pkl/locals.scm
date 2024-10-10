@@ -33,13 +33,13 @@
 (classMethod (methodHeader (identifier)) @local.definition)
 
 (objectMethod
-  (identifier) @local.definition)
-  
-(classProperty
   (methodHeader (identifier)) @local.definition)
 
+(classProperty
+  (identifier) @local.definition)
+
 (objectProperty
-  (methodHeader (identifier)) @local.definition)
+  (identifier) @local.definition)
 
 (typedIdentifier 
   (identifier) @local.definition)
