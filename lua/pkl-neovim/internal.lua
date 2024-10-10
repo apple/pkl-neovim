@@ -20,8 +20,7 @@ function M.init()
     parsers.get_parser_configs().pkl = {
       install_info = {
         url = "https://github.com/apple/tree-sitter-pkl.git",
-        -- TODO(oss): Check accessibility once repository is public
-        revision = "b79c8c4d2419e82324d9aca31e9de47ed8304f1f",
+        revision = "0.17.0",
         files = {"src/parser.c", "src/scanner.c"},
         filetype = "pkl",
         used_by = {"pcf"}
