@@ -41,6 +41,7 @@
 (objectProperty
   (identifier) @local.definition)
 
+
 (typedIdentifier 
   (identifier) @local.definition)
 
