@@ -14,13 +14,14 @@
 
 = pkl-neovim
 
-:uri-nvim-treesitter: https://github.com/nvim-treesitter/nvim-treesitter
-:uri-vim-plug: https://github.com/junegunn/vim-plug
-:uri-ultisnips: https://github.com/SirVer/ultisnips
-:uri-snipmate: https://github.com/garbas/vim-snipmate
-:uri-neovim: https://neovim.io
-:uri-packer-nvim: https://github.com/wbthomason/packer.nvim
 :uri-lazy-nvim: https://github.com/folke/lazy.nvim
+:uri-lazyvim: https://github.com/LazyVim/LazyVim
+:uri-neovim: https://neovim.io
+:uri-nvim-treesitter: https://github.com/nvim-treesitter/nvim-treesitter
+:uri-packer-nvim: https://github.com/wbthomason/packer.nvim
+:uri-snipmate: https://github.com/garbas/vim-snipmate
+:uri-ultisnips: https://github.com/SirVer/ultisnips
+:uri-vim-plug: https://github.com/junegunn/vim-plug
 
 This repository provides language support for Pkl for {uri-neovim}[neovim].
 
@@ -65,6 +66,39 @@ end
 EOF
 ----
 
+=== lazy.nvim setup
+
+Here's a sample block to add your {uri-lazy-nvim}[Lazy.nvim] configuration.
+To complete the setup, restart neovim after adding this to your setup.
+
+This config is compatible with {uri-lazyvim}[LazyVim].
+
+[source,lua]
+----
+{
+  "apple/pkl-neovim",
+  lazy = true,
+  ft = "pkl",
+  dependencies = {
+    {
+      "nvim-treesitter/nvim-treesitter",
+      build = function(_)
+        vim.cmd("TSUpdate")
+      end,
+    },
+    "L3MON4D3/LuaSnip",
+  },
+  build = function()
+    -- Set up syntax highlighting.
+    vim.cmd("TSInstall! pkl")
+  end,
+  config = function()
+    -- Set up snippets.
+    require("luasnip.loaders.from_snipmate").lazy_load()
+  end,
+}
+----
+
 === packer.nvim setup
 
 Here is a sample `+init.lua+` file using {uri-packer-nvim}[packer.nvim].
@@ -90,36 +124,6 @@ require'nvim-treesitter.configs'.setup {
   indent = {
     enable = true
   }
-}
-----
-
-=== lazy.nvim setup
-
-Here's a sample block to add your {uri-lazy-nvim}[Lazy.nvim] configuration.
-To complete the setup, restart neovim after adding this to your setup.
-
-[source,lua]
-----
-{
-  "nvim-treesitter/nvim-treesitter",
-  build = function(_)
-    vim.cmd("TSUpdate")
-  end,
-},
-{
-  "https://github.com/apple/pkl-neovim",
-  lazy = true,
-  event = {
-    "BufReadPre *.pkl",
-    "BufReadPre *.pcf",
-    "BufReadPre PklProject",
-  },
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter",
-  },
-  build = function()
-    vim.cmd("TSInstall! pkl")
-  end,
 }
 ----
 
