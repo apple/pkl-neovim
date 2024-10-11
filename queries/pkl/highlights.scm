@@ -144,7 +144,6 @@
 "local" @keyword
 "module" @keyword
 "new" @keyword
-"nothing" @type.builtin
 (nullLiteral) @constant.builtin
 "open" @keyword
 "out" @keyword
@@ -158,5 +157,7 @@
 "trace" @function.method.builtin
 (trueLiteral) @boolean
 "typealias" @keyword
-"unknown" @type.builtin
+(nothingType) @type.builtin
+(unknownType) @type.builtin
+(moduleType) @type.builtin
 "when" @keyword.conditional
