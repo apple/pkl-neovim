@@ -92,7 +92,7 @@ This config is compatible with {uri-lazyvim}[LazyVim].
     require('pkl-neovim.internal').init()
 
     -- Set up syntax highlighting.
-    vim.cmd("TSInstall! pkl")
+    vim.cmd("TSInstall pkl")
   end,
   config = function()
     -- Set up snippets.
@@ -113,7 +113,7 @@ require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'} -- Treesitter syntax highlighting.
-  use {'https://github.com/apple/pkl-neovim', after = "nvim-treesitter", run = ":TSInstall! pkl"} -- Pkl syntax highlighting
+  use {'https://github.com/apple/pkl-neovim', after = "nvim-treesitter", run = ":TSInstall pkl"} -- Pkl syntax highlighting
 end)
 
 -- The below is required for enabling the tree-sitter syntax engine, which is used by pkl-neovim.
