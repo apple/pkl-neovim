@@ -2,7 +2,22 @@ amends "package://pkg.pkl-lang.org/pkl-project-commons/pkl.impl.circleci@1.2.0#/
 
 triggerDocsBuild = "release"
 
+local testJobs = jobs.keys.filter((it) -> it.startsWith("test"))
+
 jobs {
+  ["test-license-headers"] {
+    docker {
+      new {
+        image = "ghcr.io/korandoru/hawkeye"
+      }
+    }
+    steps {
+      "checkout"
+      new RunStep {
+        command = "/bin/hawkeye check --fail-if-unknown"
+      }
+    }
+  }
   ["test"] {
     docker {
       new {
@@ -37,19 +52,19 @@ jobs {
 
 prb {
   jobs {
-    "test"
+    ...testJobs
   }
 }
 
 main {
   jobs {
-    "test"
+    ...testJobs
   }
 }
 
 release {
   jobs {
-    "test"
+    ...testJobs
     new {
       ["github-release"] {
         requires {
