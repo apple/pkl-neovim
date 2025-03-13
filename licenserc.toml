@@ -3,9 +3,10 @@ additionalHeaders = ["scripts/custom-header-style.toml"]
 headerPath = "scripts/license-header.txt"
 
 includes = [
+    "*.lua",
     "*.scm",
-    "*.vim",
     "*.snippets",
+    "*.vim",
 ]
 
 excludes = [
