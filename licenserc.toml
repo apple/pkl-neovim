@@ -1,0 +1,31 @@
+additionalHeaders = ["scripts/custom-header-style.toml"]
+
+headerPath = "scripts/license-header.txt"
+
+includes = [
+    "*.lua",
+    "*.scm",
+    "*.snippets",
+    "*.vim",
+]
+
+excludes = [
+    "doc",
+    "docs",
+]
+
+[git]
+attrs = 'auto'
+ignore = 'auto'
+
+[properties]
+copyrightOwner = "Apple Inc. and the Pkl project authors"
+
+[mapping.SCHEME_STYLE]
+extensions = ["scm"]
+
+[mapping.VIM_STYLE]
+extensions = ["vim"]
+
+[mapping.SCRIPT_STYLE]
+extensions = ["snippets"]

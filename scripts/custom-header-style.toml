@@ -1,0 +1,23 @@
+[SCHEME_STYLE]
+firstLine = ''
+endLine = "\n"
+beforeEachLine = '; '
+afterEachLine = ''
+allowBlankLines = false
+multipleLines = false
+padLines = false
+skipLinePattern = '^;!.*$'
+firstLineDetectionPattern = ';.*$'
+lastLineDetectionPattern = ';.*$'
+
+[VIM_STYLE]
+firstLine = ''
+endLine = "\n"
+beforeEachLine = '" '
+afterEachLine = ''
+allowBlankLines = false
+multipleLines = false
+padLines = false
+skipLinePattern = '^\"!.*$'
+firstLineDetectionPattern = '\".*$'
+lastLineDetectionPattern = '\".*$'
