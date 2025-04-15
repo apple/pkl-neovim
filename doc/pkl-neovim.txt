@@ -1,4 +1,4 @@
-*pkl-neovim.txt*   Last change 2024 January 17
+*pkl-neovim.txt*   Last change 2025 April 15
 
         Language support for the Pkl configuration language.
 
@@ -8,9 +8,11 @@
 CONTENTS                                                  *pkl-neovim-contents*
 
   1. Features:                                   |pkl-neovim-features|
-  2. Installation:                               |pkl-neovim-installation|
-  2. Requirements:                               |pkl-neovim-requirements|
-  3. Information:                                |pkl-neovim-information|
+  2. Commands:                                   |pkl-neovim-commands|
+  3. Installation:                               |pkl-neovim-installation|
+  3. Configuration:                              |pkl-neovim-configuration|
+  4. Requirements:                               |pkl-neovim-requirements|
+  5. Information:                                |pkl-neovim-information|
 
 ===============================================================================
 FEATURES                                                  *pkl-neovim-features*
@@ -23,7 +25,21 @@ FEATURES                                                  *pkl-neovim-features*
     (via [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter))
   * Snippet support (via [SnipMate](https://github.com/garbas/vim-snipmate) or
     [UltiSnips](https://github.com/SirVer/ultisnips))
+  * Code completion, typechecking, quick fixes, documentation via
+    [Pkl Language Server](https://pkl-lang.org/lsp/current/index.html)
 
+===============================================================================
+COMMANDS                                                  *pkl-neovim-commands*
+
+`:Pkl {command {args?}}`
+
+syncProjects
+
+    Tell the Pkl Language Server to build an understanding of the current
+    workspace's Pkl projects.
+
+    Executing this command enables language insights of dependencies, including
+    type-checking, go-to-definition, and more.
 
 ===============================================================================
 INSTALLATION                                          *pkl-neovim-installation*
@@ -55,9 +71,39 @@ INSTALLATION                                          *pkl-neovim-installation*
 <
 
 ===============================================================================
+CONFIGURATION                                        *pkl-neovim-configuration*
+
+pkl-neovim can be configured via `vim.g.pkl_neovim`.
+
+>
+ ---@type pklneovim.Config
+ vim.g.pkl_neovim
+<
+
+
+                                                             *vim.g.pkl_neovim*
+                                                                 *g:pkl_neovim*
+PklNeovimConfig                                               *PklNeovimConfig*
+
+    Fields: ~
+        {pkl_cli_path?}                     (string)
+        Local path in your file system where the Pkl CLI is installed.
+
+        {timeout_ms?}                       (integer)
+        The number of milliseconds to wait for responses from Pkl Language
+        Server.
+        (Default: 5000)
+
+        {start_command?}                    (string[])
+        The command to run to start the Pkl Language Server.
+
+===============================================================================
 REQUIREMENTS                                          *pkl-neovim-requirements*
 
-  * Neovim version 0.5 or higher (https://neovim.io/)
+  * Neovim version 0.11 or higher (https://neovim.io/)
+  * nvim-treesitter (https://github.com/nvim-treesitter/nvim-treesitter)
+  * (Optional) Java 22 or higher
+  * (Optional) Pkl Language Server (https://github.com/apple/pkl-lsp)
 
 ===============================================================================
 INFORMATION                                            *pkl-neovim-information*

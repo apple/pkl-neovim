@@ -12,4 +12,6 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-lua require "pkl-neovim.internal".init()
+lua require "pkl-neovim".init()
+
+au BufReadCmd pkl-lsp://* lua require('pkl-neovim').open_lspfile(vim.fn.expand('<amatch>'))
