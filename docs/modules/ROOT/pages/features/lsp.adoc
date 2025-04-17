@@ -1,0 +1,12 @@
+= Pkl Language Server
+
+This plugin integrates with xref:lsp:ROOT:index.adoc[Pkl Language Server] to provide code completion, hover-over documentation, project support, and more!
+
+== Supported features
+
+* Go-to-definition
+* Hover-over documentation
+* Static code analysis
+* Quick fixes
+
+The feature set grows as the language server improves over time.

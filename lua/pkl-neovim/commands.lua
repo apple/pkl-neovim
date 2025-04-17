@@ -55,7 +55,7 @@ M.register = function()
       desc = "Commands related to working with Pkl",
       complete = function(arg_lead, cmdline, _)
         -- Get the subcommand.
-        local subcmd_key, subcmd_arg_lead = cmdline:match("^['<,'>]*Rocks[!]*%s(%S+)%s(.*)$")
+        local subcmd_key, subcmd_arg_lead = cmdline:match("^['<,'>]*Pkl[!]*%s(%S+)%s(.*)$")
         if subcmd_key
           and subcmd_arg_lead
           and subcommand_tbl[subcmd_key]
