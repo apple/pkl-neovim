@@ -17,11 +17,11 @@
 ]]
 ---@enum MessageType
 local messageType = {
-	error = 1,
-	warning = 2,
-	info = 3,
-	log = 4,
-	debug = 5,
+  error = 1,
+  warning = 2,
+  info = 3,
+  log = 4,
+  debug = 5,
 }
 
 ---@class Command
