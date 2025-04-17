@@ -125,9 +125,7 @@ function M.sync_projects()
   local client = get_or_start_lsp_client()
   assert(client, "No Pkl LSP instance found attached to the current buffer")
   local buf = api.nvim_get_current_buf()
-  local function handler(err, resul)
-  end
-  client:request("pkl/syncProjects", nil, handler, buf)
+  client:request("pkl/syncProjects", nil, function() end, buf)
 end
 
 ---Tells the LSP to download the specified package.
