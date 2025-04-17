@@ -19,7 +19,7 @@ local M = {}
 
 -- Deprecated; use require('pkl-neovim').init() instead
 function M.init()
-  vim.deprecate("require('pkl-neovim.internal').init", "require('pkl-neovim').init")
+  vim.deprecate("require('pkl-neovim.internal').init", "require('pkl-neovim').init", "1.0.0", "pkl-neovim")
   require("pkl-neovim").init()
 end
 
