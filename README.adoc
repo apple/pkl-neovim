@@ -29,9 +29,10 @@ Supported features:
 +
 [source,lua]
 ----
-vim.g.pkl_neovim = {}
-vim.g.pkl_neovim.start_command = { "java", "-jar", "/path/to/pkl-lsp.jar" }
-vim.g.pkl_neovim.pkl_cli_path = { "/path/to/pkl" }
+vim.g.pkl_neovim = {
+  start_command = { "java", "-jar", "/path/to/pkl-lsp.jar" },
+  pkl_cli_path = { "/path/to/pkl" }
+}
 ----
 
 [[installation]]
