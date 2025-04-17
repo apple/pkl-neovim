@@ -6,3 +6,5 @@ xref:features/code-folding.adoc[Code Folding]::
 Collapse and expand object and class definitions.
 xref:features/code-snippets.adoc[Code Snippets]::
 Insert a code snippet by typing its shortcut.
+xref:features/lsp.adoc[Pkl Language Server]::
+Code completion, typechecking, quick fixes, goto definition, and more.

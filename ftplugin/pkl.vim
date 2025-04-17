@@ -17,3 +17,5 @@ setlocal foldexpr=nvim_treesitter#foldexpr()
 
 " comment with two slashes
 setlocal commentstring=//\ %s
+
+lua require('pkl-neovim').start_lsp()

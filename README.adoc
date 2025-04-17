@@ -8,6 +8,8 @@
 :uri-snipmate: https://github.com/garbas/vim-snipmate
 :uri-ultisnips: https://github.com/SirVer/ultisnips
 :uri-vim-plug: https://github.com/junegunn/vim-plug
+:uri-homebrew: https://brew.sh
+:uri-pkl-lsp: https://pkl-lang.org/lsp/current/index.html
 
 This repository provides language support for Pkl for {uri-neovim}[neovim].
 
@@ -16,12 +18,32 @@ Supported features:
 - Syntax highlighting (via {uri-nvim-treesitter}[nvim-treesitter])
 - Code folding (via {uri-nvim-treesitter}[nvim-treesitter])
 - Code snippets (via {uri-snipmate}[SnipMate] or {uri-ultisnips}[UltiSnips])
+- Go-to definition, code completion, typechecking, quick fixes, and more (via {uri-pkl-lsp}[Pkl Language Server])
 
+== Quick Start
+
+1. <<installation,Install the plugin>> through your favorite plugin manager.
+2. Download the latest https://github.com/apple/pkl-lsp/releases[Pkl Language Server] +
+   Alternatively, install with homebrew with `brew install pkl-lsp`
+3. Configure the LSP start command and Pkl CLI path:
++
+[source,lua]
+----
+vim.g.pkl_neovim = {
+  start_command = { "java", "-jar", "/path/to/pkl-lsp.jar" },
+  pkl_cli_path = { "/path/to/pkl" }
+}
+----
+
+[[installation]]
 == Installation
 
-This plugin requires {uri-neovim}[Neovim] version 0.5 or higher.
+=== Requirements
 
-Install {uri-nvim-treesitter}[nvim-treesitter] along side this plugin using your favorite plugin manager.
+* {uri-neovim}[Neovim] version 0.11 or higher.
+* {uri-nvim-treesitter}[nvim-treesitter]
+* {uri-pkl-lsp}[Pkl Language Server]
+* Java 22 or higher
 
 === vim-plug setup
 
@@ -75,7 +97,7 @@ This config is compatible with {uri-lazyvim}[LazyVim].
     "L3MON4D3/LuaSnip",
   },
   build = function()
-    require('pkl-neovim.internal').init()
+    require('pkl-neovim').init()
 
     -- Set up syntax highlighting.
     vim.cmd("TSInstall! pkl")
@@ -83,6 +105,12 @@ This config is compatible with {uri-lazyvim}[LazyVim].
   config = function()
     -- Set up snippets.
     require("luasnip.loaders.from_snipmate").lazy_load()
+    
+    -- Configure pkl-lsp
+    vim.g.pkl_neovim = {
+      start_command = { "java", "-jar", "/path/to/pkl-lsp.jar" },
+      pkl_cli_path = { "/path/to/pkl" }
+    }
   end,
 }
 ----
@@ -119,6 +147,18 @@ require'nvim-treesitter.configs'.setup {
 
 Some troubleshooting tips if the installation isn't working:
 
-* If using neovim 0.5, ensure you are using the 0.5-compat branch of the nvim-treesitter/nvim-treesitter plugin
+* Ensure you are using neovim 0.11 or higher.
 * Run `:TSInstall pkl` to manually install the Pkl parser.
 * If syntax highlighting doesn't work until you `:edit` the pkl file to reload it, ensure that the `pkl-neovim` plugin is configured to run after the `nvim-treesitter` plugin.
+
+== Configuration
+
+To configure pkl-neovim, set variables on `vim.g.pkl_neovim`.
+See `:h pkl-neovim` for detailed documentation on all of the available configuration options.
+
+== Project syncing
+
+To analyze project dependencies, the Pkl Language Server needs to sync all the PklProjects within the workspace.
+
+To do this, run the `:Pkl syncProjects` command.
+Alternatively, run lua function `require('pkl-neovim').sync_projects()`.

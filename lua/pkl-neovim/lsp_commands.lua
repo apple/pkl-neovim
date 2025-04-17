@@ -1,6 +1,6 @@
 --[[
 
-    Copyright © 2024-2025 Apple Inc. and the Pkl project authors. All rights reserved.
+    Copyright © 2025 Apple Inc. and the Pkl project authors. All rights reserved.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -15,12 +15,15 @@
     limitations under the License.
 
 ]]
-local M = {}
-
--- Deprecated; use require('pkl-neovim').init() instead
-function M.init()
-  vim.deprecate("require('pkl-neovim.internal').init", "require('pkl-neovim').init", "1.0.0", "pkl-neovim")
-  require("pkl-neovim").init()
-end
-
-return M
+-- Handlers responsible for executing commands.
+-- These correspond to the `workspace/executeCommand` message, which gets fired by pkl-lsp
+-- based on certain flows.
+return {
+  ["pkl.syncProjects"] = function (_, _)
+    require("pkl-neovim").sync_projects()
+  end,
+  ["pkl.downloadPackage"] = function (cmd, _)
+    assert(#cmd.arguments == 1, "Expected one argument")
+    require("pkl-neovim").download_package(cmd.arguments[1])
+  end
+}
