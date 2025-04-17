@@ -3,8 +3,9 @@
 :uri-neovim: https://neovim.io
 :uri-nvim-treesitter: https://github.com/nvim-treesitter/nvim-treesitter
 :uri-vim-plug: https://github.com/junegunn/vim-plug
+:uri-homebrew: https://brew.sh
 
-This plugin requires {uri-neovim}[Neovim] version 0.5 or higher.
+This plugin requires {uri-neovim}[Neovim] version 0.11 or higher.
 
 Install {uri-nvim-treesitter}[nvim-treesitter] alongside this plugin using your favorite plugin manager.
 
@@ -34,3 +35,27 @@ if hasConfigs then
 end
 EOF
 ----
+
+== Configuration
+
+To configure pkl-neovim, set `vim.g.pkl_neovim`.
+See `:h pkl-neovim` for detailed documentation on all of the available configuration options.
+
+=== Setting up Pkl Language Server
+
+pkl-neovim can be enhanced with the https://pkl-lang.org/lsp/current/index.html[Pkl Language Server].
+
+To use, first download the latest LSP release from https://github.com/apple/pkl-lsp/releases[GitHub].
+
+Once downloaded, configure `vim.g.pkl_neovim.start_command`:
+
+[source,lua]
+----
+vim.g.pkl_neovim = {
+  start_command = { "java", "-jar", "path/to/pkl-lsp.jar" }
+}
+----
+
+The Pkl Language Server currently requires Java 22 or higher to run.
+
+NOTE: macOS and Linux users can also use {uri-homebrew}[Homebrew] to install the language server with `brew install pkl-lsp`. If you do this, the start command can simply be `{ "pkl-lsp" }`.

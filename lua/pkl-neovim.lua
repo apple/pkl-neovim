@@ -70,6 +70,7 @@ end
 function M.start_lsp()
   local config = require("pkl-neovim.config").get_config()
   if not config.start_command then
+    vim.notify("vim.g.pkl_neovim.start_command is not configured")
     return
   end
   vim.lsp.start({
