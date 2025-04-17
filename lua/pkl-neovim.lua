@@ -79,7 +79,14 @@ function M.start_lsp()
       ["pkl.cli.path"] = config.pkl_cli_path
     },
     root_dir = vim.fs.root(0, {'.git'}),
-    cmd = config.start_command
+    cmd = config.start_command,
+    handlers = require("pkl-neovim.lsp_extensions"),
+    commands = require("pkl-neovim.lsp_commands"),
+    init_options = {
+      extendedClientCapabilities = {
+        actionableRuntimeNotifications = true
+      }
+    }
   })
 end
 
@@ -121,6 +128,16 @@ function M.sync_projects()
   local function handler(err, resul)
   end
   client:request("pkl/syncProjects", nil, handler, buf)
+end
+
+---Tells the LSP to download the specified package.
+---This requires that `vim.g.pkl_neovim.pkl_cli_path` has been set to the Pkl executable.
+---@param packageUri string
+function M.download_package(packageUri)
+  local client = get_or_start_lsp_client()
+  assert(client, "No Pkl LSP instance found attached to the current buffer")
+  local buf = api.nvim_get_current_buf()
+  client:request("pkl/downloadPackage", packageUri, function() end, buf)
 end
 
 return M
