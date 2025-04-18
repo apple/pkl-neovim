@@ -49,7 +49,7 @@ function M.init_grammar()
     parsers.get_parser_configs().pkl = {
       install_info = {
         url = "https://github.com/apple/tree-sitter-pkl.git",
-        revision = "0.17.0",
+        revision = "v0.18.1",
         files = {"src/parser.c", "src/scanner.c"},
         filetype = "pkl",
         used_by = {"pcf"}

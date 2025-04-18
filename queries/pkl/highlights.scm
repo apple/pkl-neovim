@@ -26,10 +26,18 @@
   "<" @punctuation.bracket
   ">" @punctuation.bracket)
 
-; Method calls
+; Access
+(unqualifiedAccessExpr
+  (identifier) @property)
 
-(methodCallExpr
-  (identifier) @function.call)
+(qualifiedAccessExpr
+  (identifier) @variable.member)
+
+(qualifiedAccessExpr
+  (identifier) @function.call (argumentList))
+
+(unqualifiedAccessExpr
+  (identifier) @function.call (argumentList))
 
 ; Method definitions
 
@@ -38,42 +46,37 @@
 
 ; Identifiers
 
-(classProperty (identifier) @property)
-(objectProperty (identifier) @property)
+(classProperty (identifier) @variable.member)
+(objectProperty (identifier) @variable.member)
 
-(parameterList (typedIdentifier (identifier) @variable.parameter))
-(objectBodyParameters (typedIdentifier (identifier) @variable.parameter))
+(annotation "@" @attribute (qualifiedIdentifier (identifier) @attribute))
 
-(annotation (qualifiedIdentifier) @attribute)
-(forGenerator (typedIdentifier (identifier) @variable))
-(letExpr (typedIdentifier (identifier) @variable))
-(variableExpr (identifier) @variable)
+(typedIdentifier (identifier) @variable.parameter)
+(blankIdentifier) @variable.parameter.builtin
 (importClause (identifier) @variable)
-(variableObjectLiteral (identifier) @variable)
-(propertyCallExpr (identifier) @variable)
 
 ; (identifier) @variable
 
 ; Literals
 
 (stringConstant) @string
-(slStringLiteral) @string
-(mlStringLiteral) @string
+(slStringLiteralExpr) @string
+(mlStringLiteralExpr) @string
 
 (escapeSequence) @string.escape
 
-(intLiteral) @number
-(floatLiteral) @number
+(intLiteralExpr) @number
+(floatLiteralExpr) @number.float
 
-(interpolationExpr
+(stringInterpolation
   "\\(" @punctuation.special
   ")" @punctuation.special) @none
 
-(interpolationExpr
+(stringInterpolation
  "\\#(" @punctuation.special
  ")" @punctuation.special) @none
 
-(interpolationExpr
+(stringInterpolation
   "\\##(" @punctuation.special
   ")" @punctuation.special) @none
 
@@ -84,7 +87,6 @@
 ; Operators
 
 "??" @operator
-"@"  @operator
 "="  @operator
 "<"  @operator
 ">"  @operator
@@ -128,10 +130,10 @@
 "amends" @keyword
 "as" @keyword
 "class" @keyword
-"else" @keyword.conditional ; TODO: fix 'else' not highlighting after 'when'
+"else" @keyword.conditional
 "extends" @keyword
 "external" @keyword
-(falseLiteral) @boolean
+(falseLiteralExpr) @boolean
 "for" @keyword.repeat
 "function" @keyword.function
 "hidden" @keyword
@@ -144,7 +146,7 @@
 "local" @keyword
 "module" @keyword
 "new" @keyword
-(nullLiteral) @constant.builtin
+(nullLiteralExpr) @constant.builtin
 "open" @keyword
 "out" @keyword
 (outerExpr) @variable.builtin
@@ -155,7 +157,7 @@
 (thisExpr) @variable.builtin
 "throw" @function.method.builtin
 "trace" @function.method.builtin
-(trueLiteral) @boolean
+(trueLiteralExpr) @boolean
 "typealias" @keyword
 (nothingType) @type.builtin
 (unknownType) @type.builtin
