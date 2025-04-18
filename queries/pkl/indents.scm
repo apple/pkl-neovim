@@ -16,7 +16,7 @@
   (objectBody)
   (classBody)
   (ifExpr)
-  (mlStringLiteral)
+  (mlStringLiteralExpr)
   (importClause)
   (importGlobClause)
 ] @indent.begin
