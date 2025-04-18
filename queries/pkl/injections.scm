@@ -12,10 +12,13 @@
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
 
-; TODO this doesn't work; why?
 (
-  ((unqualifiedAccessExpr (identifier) @methodName (argumentList (slStringLiteralExpr (slStringLiteralPart) @injection.content (escapeSequence) @injection.content)))
+  ((unqualifiedAccessExpr (identifier) @methodName (argumentList (slStringLiteralExpr (slStringLiteralPart) @injection.content)))
     (#set! injection.language "regex"))
   (#eq? @methodName "Regex"))
 
+(
+  ((unqualifiedAccessExpr (identifier) @methodName (argumentList (slStringLiteralExpr (escapeSequence) @injection.content)))
+    (#set! injection.language "regex"))
+  (#eq? @methodName "Regex"))
 ; TODO: inject markdown into doc comments

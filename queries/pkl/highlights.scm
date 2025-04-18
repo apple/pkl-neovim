@@ -19,8 +19,7 @@
 
 (clazz (identifier) @type)
 (typeAlias (identifier) @type)
-((identifier) @type
- (#match? @type "^[A-Z]"))
+(declaredType (qualifiedIdentifier (identifier) @type))
 
 (typeArgumentList
   "<" @punctuation.bracket
@@ -54,8 +53,6 @@
 (typedIdentifier (identifier) @variable.parameter)
 (blankIdentifier) @variable.parameter.builtin
 (importClause (identifier) @variable)
-
-; (identifier) @variable
 
 ; Literals
 
