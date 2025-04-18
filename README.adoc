@@ -31,7 +31,7 @@ Supported features:
 ----
 vim.g.pkl_neovim = {
   start_command = { "java", "-jar", "/path/to/pkl-lsp.jar" },
-  pkl_cli_path = { "/path/to/pkl" }
+  pkl_cli_path = "/path/to/pkl"
 }
 ----
 
