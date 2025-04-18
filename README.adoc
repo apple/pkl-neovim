@@ -31,7 +31,7 @@ Supported features:
 ----
 vim.g.pkl_neovim = {
   start_command = { "java", "-jar", "/path/to/pkl-lsp.jar" },
-  pkl_cli_path = { "/path/to/pkl" }
+  pkl_cli_path = "/path/to/pkl"
 }
 ----
 
@@ -105,11 +105,11 @@ This config is compatible with {uri-lazyvim}[LazyVim].
   config = function()
     -- Set up snippets.
     require("luasnip.loaders.from_snipmate").lazy_load()
-    
+
     -- Configure pkl-lsp
     vim.g.pkl_neovim = {
       start_command = { "java", "-jar", "/path/to/pkl-lsp.jar" },
-      pkl_cli_path = { "/path/to/pkl" }
+      pkl_cli_path = "/path/to/pkl"
     }
   end,
 }
