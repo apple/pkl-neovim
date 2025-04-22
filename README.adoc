@@ -154,7 +154,7 @@ Some troubleshooting tips if the installation isn't working:
 == Configuration
 
 To configure pkl-neovim, set variables on `vim.g.pkl_neovim`.
-See `:h pkl-neovim` for detailed documentation on all of the available configuration options.
+See `:h vim.g.pkl_neovim` for detailed documentation on all of the available configuration options.
 
 == Project syncing
 

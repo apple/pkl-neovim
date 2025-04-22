@@ -30,10 +30,10 @@ FEATURES                                                  *pkl-neovim-features*
 
 ===============================================================================
 COMMANDS                                                  *pkl-neovim-commands*
-
+                                                                         *:Pkl*
 `:Pkl {command {args?}}`
 
-syncProjects
+:Pkl syncProjects
 
     Tell the Pkl Language Server to build an understanding of the current
     workspace's Pkl projects.
@@ -75,11 +75,18 @@ CONFIGURATION                                        *pkl-neovim-configuration*
 
 pkl-neovim can be configured via `vim.g.pkl_neovim`.
 
+For example, in your `init.lua`:
+
+    >
+    vim.g.pkl_neovim = {
+      start_command = { "java", "-jar", "/path/to/pkl-lsp" }
+    }
+<
+
 >
  ---@type pklneovim.Config
  vim.g.pkl_neovim
 <
-
 
                                                              *vim.g.pkl_neovim*
                                                                  *g:pkl_neovim*
@@ -104,7 +111,6 @@ REQUIREMENTS                                          *pkl-neovim-requirements*
   * nvim-treesitter (https://github.com/nvim-treesitter/nvim-treesitter)
   * (Optional) Java 22 or higher
   * (Optional) Pkl Language Server (https://github.com/apple/pkl-lsp)
-
 ===============================================================================
 INFORMATION                                            *pkl-neovim-information*
 
