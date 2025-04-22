@@ -18,7 +18,7 @@
 (clazz) @local.scope
 (classMethod) @local.scope
 (objectMethod) @local.scope
-(functionLiteral) @local.scope
+(functionLiteralExpr) @local.scope
 (objectBody) @local.scope
 (letExpr) @local.scope
 (forGenerator) @local.scope
@@ -41,10 +41,10 @@
 (objectProperty
   (identifier) @local.definition)
 
-(typedIdentifier 
+(typedIdentifier
   (identifier) @local.definition)
 
 ; References
 
-(variableExpr 
+(unqualifiedAccessExpr
   (identifier) @local.reference)

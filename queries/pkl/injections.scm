@@ -12,12 +12,13 @@
 ; See the License for the specific language governing permissions and
 ; limitations under the License.
 
-; this definition is imprecise in that 
-; * any qualified or unqualified call to a method named "Regex" is considered a regex
-; * string delimiters are considered part of the regex
 (
-  ((methodCallExpr (identifier) @methodName (argumentList (slStringLiteral) @injection.content))
+  ((unqualifiedAccessExpr (identifier) @methodName (argumentList (slStringLiteralExpr (slStringLiteralPart) @injection.content)))
     (#set! injection.language "regex"))
   (#eq? @methodName "Regex"))
- 
+
+(
+  ((unqualifiedAccessExpr (identifier) @methodName (argumentList (slStringLiteralExpr (escapeSequence) @injection.content)))
+    (#set! injection.language "regex"))
+  (#eq? @methodName "Regex"))
 ; TODO: inject markdown into doc comments
