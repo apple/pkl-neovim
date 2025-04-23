@@ -31,6 +31,8 @@ Supported features:
 ----
 vim.g.pkl_neovim = {
   start_command = { "java", "-jar", "/path/to/pkl-lsp.jar" },
+  -- or if pkl-lsp is installed with brew:
+  -- start_command = { "pkl-lsp" },
   pkl_cli_path = "/path/to/pkl"
 }
 ----
@@ -109,6 +111,8 @@ This config is compatible with {uri-lazyvim}[LazyVim].
     -- Configure pkl-lsp
     vim.g.pkl_neovim = {
       start_command = { "java", "-jar", "/path/to/pkl-lsp.jar" },
+      -- or if pkl-lsp is installed with brew:
+      -- start_command = { "pkl-lsp" },
       pkl_cli_path = "/path/to/pkl"
     }
   end,
