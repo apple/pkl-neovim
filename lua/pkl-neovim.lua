@@ -82,9 +82,9 @@ function M.start_lsp()
     -- failing that, look for a `.git` dir
     -- failing that, look for a PklProject file
     root_dir =
-      vim.fs.root(0, {'.pkl-lsp'})
-        or vim.fs.root(0, {'.git'})
-        or vim.fs.root(0, {'PklProject'}),
+      vim.fs.root(0, '.pkl-lsp')
+        or vim.fs.root(0, '.git')
+        or vim.fs.root(0, 'PklProject'),
     cmd = config.start_command,
     handlers = require("pkl-neovim.lsp_extensions"),
     commands = require("pkl-neovim.lsp_commands"),
