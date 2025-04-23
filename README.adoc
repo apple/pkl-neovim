@@ -162,7 +162,20 @@ See `:h vim.g.pkl_neovim` for detailed documentation on all of the available con
 
 == Project syncing
 
-To analyze project dependencies, the Pkl Language Server needs to sync all the PklProjects within the workspace.
+To analyze project dependencies, the Pkl Language Server needs to sync all the PklProjects within the <<workspace-root,workspace root>>.
 
 To do this, run the `:Pkl syncProjects` command.
 Alternatively, run lua function `require('pkl-neovim').sync_projects()`.
+
+[[workspace-root]]
+== Workspace root
+
+When starting {uri-pkl-lsp}[Pkl Language Server], pkl-neovim will look for the following files/directories to determine what the workspace root is (in descending order of priority):
+
+1. `.pkl-lsp/`
+2. `.git/`
+3. `PklProject`
+
+If you are working on a non-git based project, it can be helpful to create a `.pkl-lsp` to mark where the workspace root is.
+This allows the language server to discover multiple Pkl projects, and analyze dependency imports in all of them.
+This also allows pkl-neovim to determine that the same instance of the language server can be shared between different buffers.
