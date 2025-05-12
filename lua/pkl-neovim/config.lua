@@ -19,7 +19,7 @@ local M = {}
 
 ---@class pklneovim.Config
 ---@field pkl_cli_path? string
----@field timeout_ms? integer
+---@field timeout_ms? number
 ---@field start_command? string[]
 
 ---@param path string The path to the field being validated
@@ -35,7 +35,7 @@ end
 local function validate(cfg)
   return validate_path("vim.g.pkl_neovim", {
     pkl_cli_path = { cfg.pkl_cli_path, {"string", "nil"} },
-    timeout_ms = { cfg.timeout_ms, {"integer", "nil"} },
+    timeout_ms = { cfg.timeout_ms, {"number", "nil"} },
     start_command = { cfg.start_command, {"table", "nil"} }
   })
 end
