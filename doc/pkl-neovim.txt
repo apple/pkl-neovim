@@ -96,7 +96,7 @@ PklNeovimConfig                                               *PklNeovimConfig*
         {pkl_cli_path?}                     (string)
         Local path in your file system where the Pkl CLI is installed.
 
-        {timeout_ms?}                       (integer)
+        {timeout_ms?}                       (number)
         The number of milliseconds to wait for responses from Pkl Language
         Server.
         (Default: 5000)
