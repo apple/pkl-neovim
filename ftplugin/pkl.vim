@@ -12,10 +12,5 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-" Fold using tree-sitter
-setlocal foldexpr=nvim_treesitter#foldexpr()
-
 " comment with two slashes
 setlocal commentstring=//\ %s
-
-lua require('pkl-neovim').start_lsp()
