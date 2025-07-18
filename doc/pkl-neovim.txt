@@ -1,4 +1,4 @@
-*pkl-neovim.txt*   Last change 2025 April 15
+*pkl-neovim.txt*   Last change 2025 July 17
 
         Language support for the Pkl configuration language.
 
@@ -10,7 +10,7 @@ CONTENTS                                                  *pkl-neovim-contents*
   1. Features:                                   |pkl-neovim-features|
   2. Commands:                                   |pkl-neovim-commands|
   3. Installation:                               |pkl-neovim-installation|
-  3. Configuration:                              |pkl-neovim-configuration|
+  3. LSP Configuration:                          |pkl-neovim-lsp-configuration|
   4. Requirements:                               |pkl-neovim-requirements|
   5. Information:                                |pkl-neovim-information|
 
@@ -18,11 +18,14 @@ CONTENTS                                                  *pkl-neovim-contents*
 FEATURES                                                  *pkl-neovim-features*
 
   * Syntax Highlighting
-    (via [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter))
+    (via Vim's builtin syntax or 
+    [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter))
   * Indentation
-    (via [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter))
+    (via Vim's builtin syntax or 
+    [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter))
   * Code folding
-    (via [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter))
+    (via Vim's builtin folding feature or 
+    [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter))
   * Snippet support (via [SnipMate](https://github.com/garbas/vim-snipmate) or
     [UltiSnips](https://github.com/SirVer/ultisnips))
   * Code completion, typechecking, quick fixes, documentation via
@@ -31,6 +34,8 @@ FEATURES                                                  *pkl-neovim-features*
 ===============================================================================
 COMMANDS                                                  *pkl-neovim-commands*
                                                                          *:Pkl*
+*NOTE:* Commands are only supported by Neovim
+
 `:Pkl {command {args?}}`
 
 :Pkl syncProjects
@@ -43,6 +48,8 @@ COMMANDS                                                  *pkl-neovim-commands*
 
 ===============================================================================
 INSTALLATION                                          *pkl-neovim-installation*
+
+*NOTE:* Tree-sitter is only supported by Neovim
 
   1. Install {nvim-tree-sitter/nvim-treesitter} and {pkl-neovim} using your
      plugin manager of choice. For example, if using vim-plug, add this to
@@ -71,13 +78,14 @@ INSTALLATION                                          *pkl-neovim-installation*
 <
 
 ===============================================================================
-CONFIGURATION                                        *pkl-neovim-configuration*
+LSP CONFIGURATION                                        *pkl-neovim-lsp-configuration*
+
+*nvim-lsp*
 
 pkl-neovim can be configured via `vim.g.pkl_neovim`.
 
 For example, in your `init.lua`:
-
-    >
+>
     vim.g.pkl_neovim = {
       start_command = { "java", "-jar", "/path/to/pkl-lsp" }
     }
@@ -87,7 +95,38 @@ For example, in your `init.lua`:
  ---@type pklneovim.Config
  vim.g.pkl_neovim
 <
+*yegappan/lsp*
 
+In .vimrc:
+>
+  call LspAddServer([#{
+          \   name: 'pkl',
+          \   filetype: ['pkl'],
+          \   path: '/usr/bin/java',
+          \   args: [
+          \     '-jar',
+          \     '/path/to/pkl-lsp.jar',
+          \   ],
+          \   initializationOptions: #{
+          \     pkl_cli_path: '/usr/bin/pkl'
+          \   },
+          \   syncInit: v:true,
+          \   debug: v:false
+          \ }])
+<
+
+*CoC.nvim*
+
+In coc-settings.json
+>
+  "languageserver": {
+    "pkl-lsp": {
+      "command": "java",
+      "args": ["-jar", "/path/to/pkl-lsp.jar"],
+      "filetypes": ["pkl"],
+    }
+  }
+<
                                                              *vim.g.pkl_neovim*
                                                                  *g:pkl_neovim*
 PklNeovimConfig                                               *PklNeovimConfig*
