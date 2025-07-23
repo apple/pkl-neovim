@@ -24,3 +24,14 @@ setlocal expandtab
 setlocal shiftwidth=2
 " Use syntax folding
 setlocal foldmethod=syntax
+
+let s:yegappan_lsp_exists = exists("*LspRequestCustom")
+let s:coc_exists = exists("*CocRequest")
+
+if (s:yegappan_lsp_exists)
+	command! PklSync call LspRequestCustom('pkl-lsp', 'pkl/syncProjects', 0)
+	command! -nargs=1 PklDownloadPackage call LspRequestCustom('pkl-lsp', 'pkl/downloadPackage', <f-args>)
+elseif (s:coc_exists)
+	command! PklSync call CocRequest('pkl-lsp', 'pkl/syncProjects')
+	command! -nargs=1 PklDownloadPackage call CocRequest('pkl-lsp', 'pkl/downloadPackage', <f-args>)
+endif
