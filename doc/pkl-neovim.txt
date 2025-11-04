@@ -96,6 +96,12 @@ PklNeovimConfig                                               *PklNeovimConfig*
         {pkl_cli_path?}                     (string)
         Local path in your file system where the Pkl CLI is installed.
 
+        {pkl_formatter_grammar_version?}    (number)
+        Grammar version to use when formatting Pkl code.
+        Possible values: 1 or 2.
+        1: Pkl 0.25 - 0.29
+        2: Pkl 0.30+
+
         {timeout_ms?}                       (number)
         The number of milliseconds to wait for responses from Pkl Language
         Server.
