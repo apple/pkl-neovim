@@ -19,7 +19,7 @@ local M = {}
 
 ---@class pklneovim.Config
 ---@field pkl_cli_path? string
----@field pkl_formatter_grammar_version? string
+---@field pkl_formatter_grammar_version? number
 ---@field timeout_ms? number
 ---@field start_command? string[]
 
