@@ -18,4 +18,12 @@ setlocal foldexpr=nvim_treesitter#foldexpr()
 " comment with two slashes
 setlocal commentstring=//\ %s
 
+" Need to enable treesitter highlighting if on main branch.
+" `vim.treesitter.start` symbol doesn't exist on master branch.
+lua << EOF
+  if vim.treesitter.start then
+    vim.treesitter.start()
+  end
+EOF
+
 lua require('pkl-neovim').start_lsp()

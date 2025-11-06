@@ -43,21 +43,48 @@ function M.init()
 end
 
 function M.init_grammar()
-  local treesitterExists, parsers = pcall(require, "nvim-treesitter.parsers")
-  local _, installer = pcall(require, "nvim-treesitter.install")
-  if treesitterExists then
-    parsers.get_parser_configs().pkl = {
-      install_info = {
-        url = "https://github.com/apple/tree-sitter-pkl.git",
-        revision = "v0.18.1",
-        files = {"src/parser.c", "src/scanner.c"},
-        filetype = "pkl",
-        used_by = {"pcf"}
-      },
-    }
+  local parsersModuleExists, parsers = pcall(require, "nvim-treesitter.parsers")
+  local installerExists, installer = pcall(require, "nvim-treesitter.install")
+  local pkl_parser_config = {
+    install_info = {
+      url = "https://github.com/apple/tree-sitter-pkl.git",
+      revision = "v0.20.0",
+      files = {"src/parser.c", "src/scanner.c"},
+      filetype = "pkl",
+      used_by = {"pcf"}
+    },
+  }
+  if parsersModuleExists then
+    -- Try the "master" branch API first (get_parser_configs)
+    local parser_config = parsers.get_parser_configs and parsers.get_parser_configs()
+    if parser_config then
+      -- "master" branch API
+      parser_config.pkl = pkl_parser_config
 
-    if not parsers.has_parser("pkl") then
-      installer.update("pkl")
+      if installerExists and not parsers.has_parser("pkl") then
+        installer.update("pkl")
+      end
+    else
+      -- "main" branch API - register parser info differently
+      -- In main branch, parser configs are accessed via the list property
+      local ok, parser_list = pcall(function()
+        return require("nvim-treesitter.parsers").list
+      end)
+
+      if ok and parser_list then
+        parser_list.pkl = pkl_parser_config
+      end
+
+      -- Register the language associations
+      if vim.treesitter and vim.treesitter.language then
+        vim.treesitter.language.register("pkl", "pkl")
+        vim.treesitter.language.register("pkl", "pcf")
+      end
+
+      -- Install parser if needed (main branch)
+      if installerExists then
+        installer.update { with_sync = false, lang = "pkl" }
+      end
     end
   else
     print("[pkl-neovim] Required plugin 'tree-sitter/tree-sitter' not found.")
