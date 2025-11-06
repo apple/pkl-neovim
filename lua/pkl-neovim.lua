@@ -85,9 +85,6 @@ function M.init_grammar()
       if installerExists then
         installer.update { with_sync = false, lang = "pkl" }
       end
-
-      -- Ensure treesitter is started
-      vim.treesitter.start()
     end
   else
     print("[pkl-neovim] Required plugin 'tree-sitter/tree-sitter' not found.")
