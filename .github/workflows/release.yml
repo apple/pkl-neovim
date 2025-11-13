@@ -1,0 +1,71 @@
+# Do not modify!
+# This file was generated from a template using https://github.com/StefMa/pkl-gha
+
+name: Release
+'on':
+  push:
+    branches-ignore:
+    - '**'
+    tags:
+    - '**'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  test-format-license-headers:
+    name: hawkeye-check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        fetch-depth: 0
+    - run: hawkeye check --config licenserc.toml --fail-if-unknown
+    container:
+      image: ghcr.io/korandoru/hawkeye@sha256:c3ab994c0d81f3d116aabf9afc534e18648e3e90d7525d741c1e99dd8166ec85
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo hello
+  deploy-github-release:
+    needs:
+    - test-format-license-headers
+    - test
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+    - env:
+        GH_TOKEN: ${{ github.token }}
+        GH_REPO: ${{ github.repository }}
+      run: |-
+        gh release create "${{ github.ref_name }}" \
+          --title "${{ github.ref_name }}" \
+          --target "${{ github.sha }}" \
+          --verify-tag \
+          --notes "Release notes: https://pkl-lang.org/neovim/current/changelog.html#release-${{ github.ref_name }}"
+  trigger-downstream-builds:
+    if: github.repository_owner == 'apple'
+    needs:
+    - test-format-license-headers
+    - test
+    - deploy-github-release
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create app token
+      id: app-token
+      uses: actions/create-github-app-token@v2
+      with:
+        app-id: ${{ secrets.PKL_CI_CLIENT_ID }}
+        private-key: ${{ secrets.PKL_CI }}
+        owner: ${{ github.repository_owner }}
+    - name: Trigger pkl-lang.org build
+      env:
+        GH_TOKEN: ${{ steps.app-token.outputs.token }}
+      run: |-
+        gh workflow run \
+          --repo apple/pkl-lang.org \
+          --ref main \
+          --field source_run="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+          main.yml

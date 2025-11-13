@@ -1,0 +1,31 @@
+# Do not modify!
+# This file was generated from a template using https://github.com/StefMa/pkl-gha
+
+name: Build
+'on':
+  push:
+    branches-ignore:
+    - main
+    - release/*
+    tags-ignore:
+    - '**'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+permissions:
+  contents: read
+jobs:
+  test-format-license-headers:
+    name: hawkeye-check
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        fetch-depth: 0
+    - run: hawkeye check --config licenserc.toml --fail-if-unknown
+    container:
+      image: ghcr.io/korandoru/hawkeye@sha256:c3ab994c0d81f3d116aabf9afc534e18648e3e90d7525d741c1e99dd8166ec85
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo hello
