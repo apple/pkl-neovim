@@ -2,3 +2,4 @@
 .idea/
 .vscode/
 doc/tags
+.pkl-lsp/
