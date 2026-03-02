@@ -1,4 +1,4 @@
-*pkl-neovim.txt*   Last change 2025 April 15
+*pkl-neovim.txt*   Last change 2026 February 27
 
         Language support for the Pkl configuration language.
 
@@ -101,6 +101,9 @@ PklNeovimConfig                                               *PklNeovimConfig*
         Possible values: "1" or "2".
         1: Pkl 0.25 - 0.29
         2: Pkl 0.30+
+
+        {pkl_projects_excluded_directories?}    (string[])
+        Workspace-relative directories to exclude when syncing projects.
 
         {timeout_ms?}                       (number)
         The number of milliseconds to wait for responses from Pkl Language

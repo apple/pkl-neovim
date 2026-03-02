@@ -167,6 +167,8 @@ To analyze project dependencies, the Pkl Language Server needs to sync all the P
 To do this, run the `:Pkl syncProjects` command.
 Alternatively, run lua function `require('pkl-neovim').sync_projects()`.
 
+Directories may be excluded from project syncing using the `pkl_projects_excluded_directories` configuration option.
+
 [[workspace-root]]
 == Workspace root
 

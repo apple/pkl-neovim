@@ -1,6 +1,6 @@
 --[[
 
-    Copyright © 2025 Apple Inc. and the Pkl project authors. All rights reserved.
+    Copyright © 2025-2026 Apple Inc. and the Pkl project authors. All rights reserved.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ local M = {}
 ---@class pklneovim.Config
 ---@field pkl_cli_path? string
 ---@field pkl_formatter_grammar_version? string
+---@field pkl_projects_excluded_directories? string[]
 ---@field timeout_ms? number
 ---@field start_command? string[]
 
@@ -37,6 +38,7 @@ local function validate(cfg)
   return validate_path("vim.g.pkl_neovim", {
     pkl_cli_path = { cfg.pkl_cli_path, {"string", "nil"} },
     pkl_formatter_grammar_version = { cfg.pkl_formatter_grammar_version, { "string", "nil" } },
+    pkl_projects_excluded_directories = { cfg.pkl_projects_excluded_directories { "table", "nil" } },
     timeout_ms = { cfg.timeout_ms, {"number", "nil"} },
     start_command = { cfg.start_command, {"table", "nil"} }
   })
