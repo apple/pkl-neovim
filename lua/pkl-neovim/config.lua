@@ -38,7 +38,7 @@ local function validate(cfg)
   return validate_path("vim.g.pkl_neovim", {
     pkl_cli_path = { cfg.pkl_cli_path, {"string", "nil"} },
     pkl_formatter_grammar_version = { cfg.pkl_formatter_grammar_version, { "string", "nil" } },
-    pkl_projects_excluded_directories = { cfg.pkl_projects_excluded_directories { "table", "nil" } },
+    pkl_projects_excluded_directories = { cfg.pkl_projects_excluded_directories, { "table", "nil" } },
     timeout_ms = { cfg.timeout_ms, {"number", "nil"} },
     start_command = { cfg.start_command, {"table", "nil"} }
   })
