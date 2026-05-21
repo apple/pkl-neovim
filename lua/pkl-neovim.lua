@@ -100,12 +100,14 @@ function M.start_lsp()
     vim.notify_once("Configuration `vim.g.pkl_neovim.start_command` is not set; Pkl LSP features are not enabled.", vim.log.levels.WARN)
     return
   end
+
   vim.lsp.start({
     name = 'pkl',
     settings = {
       ["pkl.cli.path"] = config.pkl_cli_path,
       ["pkl.formatter.grammarVersion"] = config.pkl_formatter_grammar_version,
       ["pkl.projects.excludedDirectories"] = config.pkl_projects_excluded_directories,
+      ["pkl.modulepath"] = config.pkl_modulepath,
     },
     -- first look for a `.pkl-lsp` dir
     -- failing that, look for a `.git` dir

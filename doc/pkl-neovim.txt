@@ -93,10 +93,10 @@ For example, in your `init.lua`:
 PklNeovimConfig                                               *PklNeovimConfig*
 
     Fields: ~
-        {pkl_cli_path?}                     (string)
+        {pkl_cli_path?}                         (string)
         Local path in your file system where the Pkl CLI is installed.
 
-        {pkl_formatter_grammar_version?}    (string)
+        {pkl_formatter_grammar_version?}        (string)
         Grammar version to use when formatting Pkl code.
         Possible values: "1" or "2".
         1: Pkl 0.25 - 0.29
@@ -105,12 +105,15 @@ PklNeovimConfig                                               *PklNeovimConfig*
         {pkl_projects_excluded_directories?}    (string[])
         Workspace-relative directories to exclude when syncing projects.
 
-        {timeout_ms?}                       (number)
+        {pkl_modulepath?}                       (string[])
+        Workspace-relative directories to resolve `modulepath:` URIs against.
+
+        {timeout_ms?}                           (number)
         The number of milliseconds to wait for responses from Pkl Language
         Server.
         (Default: 5000)
 
-        {start_command?}                    (string[])
+        {start_command?}                        (string[])
         The command to run to start the Pkl Language Server.
 
 ===============================================================================

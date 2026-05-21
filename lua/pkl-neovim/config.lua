@@ -21,6 +21,7 @@ local M = {}
 ---@field pkl_cli_path? string
 ---@field pkl_formatter_grammar_version? string
 ---@field pkl_projects_excluded_directories? string[]
+---@field pkl_modulepath? string[]
 ---@field timeout_ms? number
 ---@field start_command? string[]
 
@@ -39,6 +40,7 @@ local function validate(cfg)
     pkl_cli_path = { cfg.pkl_cli_path, {"string", "nil"} },
     pkl_formatter_grammar_version = { cfg.pkl_formatter_grammar_version, { "string", "nil" } },
     pkl_projects_excluded_directories = { cfg.pkl_projects_excluded_directories, { "table", "nil" } },
+    pkl_modulepath = { cfg.pkl_modulepath, { "table", "nil" } },
     timeout_ms = { cfg.timeout_ms, {"number", "nil"} },
     start_command = { cfg.start_command, {"table", "nil"} }
   })
@@ -53,6 +55,7 @@ function M.get_config()
     local user_config = vim.g.pkl_neovim or {}
     local ok, err = validate(user_config)
     if not ok then
+      assert(err ~= nil)
       vim.notify(err, vim.log.levels.ERROR)
       return {}
     end
