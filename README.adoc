@@ -146,7 +146,31 @@ require'nvim-treesitter.configs'.setup {
   }
 }
 ----
+=== Verify Installation
 
+Check that the required tools are installed:
+
+[source,bash]
+----
+nvim --version
+java --version
+pkl --version
+----
+
+Open a `.pkl` file in Neovim and verify that:
+
+* `pkl --version` returns the expected version.
+* `java --version` reports Java 22 or higher.
+* Syntax highlighting is enabled.
+* The Pkl parser is installed.
+* The Pkl Language Server starts successfully.
+
+If the parser is not installed, run:
+
+[source,vim]
+----
+:TSInstall pkl
+----
 === Troubleshooting
 
 Some troubleshooting tips if the installation isn't working:
