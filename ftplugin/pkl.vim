@@ -1,4 +1,4 @@
-" Copyright © 2024-2025 Apple Inc. and the Pkl project authors. All rights reserved.
+" Copyright © 2024-2026 Apple Inc. and the Pkl project authors. All rights reserved.
 "
 " Licensed under the Apache License, Version 2.0 (the "License");
 " you may not use this file except in compliance with the License.
@@ -12,18 +12,12 @@
 " See the License for the specific language governing permissions and
 " limitations under the License.
 
-" Fold using tree-sitter
-setlocal foldexpr=nvim_treesitter#foldexpr()
+" Fold using Neovim's built-in tree-sitter support.
+setlocal foldexpr=v:lua.vim.treesitter.foldexpr()
 
 " comment with two slashes
 setlocal commentstring=//\ %s
 
-" Need to enable treesitter highlighting if on main branch.
-" `vim.treesitter.start` symbol doesn't exist on master branch.
-lua << EOF
-  if vim.treesitter.start then
-    vim.treesitter.start()
-  end
-EOF
+lua pcall(vim.treesitter.start)
 
 lua require('pkl-neovim').start_lsp()
