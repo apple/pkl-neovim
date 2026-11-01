@@ -104,10 +104,12 @@ function M.start_lsp()
   vim.lsp.start({
     name = 'pkl',
     settings = {
-      ["pkl.cli.path"] = config.pkl_cli_path,
-      ["pkl.formatter.grammarVersion"] = config.pkl_formatter_grammar_version,
-      ["pkl.projects.excludedDirectories"] = config.pkl_projects_excluded_directories,
-      ["pkl.modulepath"] = config.pkl_modulepath,
+      pkl = {
+        cli = { path = config.pkl_cli_path },
+        formatter = { grammarVersion = config.pkl_formatter_grammar_version },
+        projects = { excludedDirectories = config.pkl_projects_excluded_directories },
+        modulepath = config.pkl_modulepath,
+      },
     },
     -- first look for a `.pkl-lsp` dir
     -- failing that, look for a `.git` dir
