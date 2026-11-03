@@ -19,6 +19,9 @@ amends "@pkl.impl.ghactions/PklCI.pkl"
 import "@com.github.actions/context.pkl"
 import "@pkl.impl.ghactions/jobs/HawkeyeCheck.pkl"
 
+// see https://packages.ubuntu.com/search?keywords=neovim&searchon=names&suite=resolute&section=all for available versions
+local NEOVIM_VERSION = "0.12.6"
+
 triggerDocsBuild = "release"
 
 testReports {
@@ -38,8 +41,23 @@ main {
     ["test"] {
       `runs-on` = "ubuntu-latest"
       steps {
-        // We don't have any tests right now.
-        new { run = "echo hello" }
+        module.catalog.`actions/checkout@v6`
+        new {
+          name = "Setup Neovim"
+          env {
+            ["NEOVIM_VERSION"] = NEOVIM_VERSION
+          }
+          run =
+            #"""
+            curl -fLO https://github.com/neovim/neovim/releases/download/v"$NEOVIM_VERSION"/nvim-linux-x86_64.tar.gz
+            tar -C . -xzf nvim-linux-x86_64.tar.gz
+            echo "$PWD/nvim-linux-x86_64/bin" >> "$GITHUB_PATH"
+            """#
+        }
+        new {
+          name = "Run tests"
+          run = "make test"
+        }
       }
     }
   }
