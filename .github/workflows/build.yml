@@ -37,7 +37,7 @@ jobs:
       env:
         NEOVIM_VERSION: 0.12.6
       run: |-
-        curl -LO https://github.com/neovim/neovim/releases/v"$NEOVIM_VERSION"/download/nvim-linux-x86_64.tar.gz
+        curl -fLO https://github.com/neovim/neovim/releases/download/v"$NEOVIM_VERSION"/nvim-linux-x86_64.tar.gz
         tar -C . -xzf nvim-linux-x86_64.tar.gz
         echo "$PWD/nvim-linux-x86_64/bin" >> "$GITHUB_PATH"
     - name: Run tests
