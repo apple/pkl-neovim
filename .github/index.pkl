@@ -19,7 +19,8 @@ amends "@pkl.impl.ghactions/PklCI.pkl"
 import "@com.github.actions/context.pkl"
 import "@pkl.impl.ghactions/jobs/HawkeyeCheck.pkl"
 
-local NEOVIM_VERSION = "0.12.6"
+// see https://launchpad.net/ubuntu/+source/neovim for available versions
+local NEOVIM_VERSION = "0.12.4-1"
 
 triggerDocsBuild = "release"
 
