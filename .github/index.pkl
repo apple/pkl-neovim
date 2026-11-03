@@ -38,8 +38,24 @@ main {
     ["test"] {
       `runs-on` = "ubuntu-latest"
       steps {
-        // We don't have any tests right now.
-        new { run = "echo hello" }
+        new {
+          uses = "actions/checkout@v6"
+          `with` {
+            ["persist-credentials"] = false
+          }
+        }
+        new {
+          name = "Install Neovim"
+          run =
+            #"""
+            sudo apt-get update
+            sudo apt-get install -y neovim
+            """#
+        }
+        new {
+          name = "Run tests"
+          run = "make test"
+        }
       }
     }
   }

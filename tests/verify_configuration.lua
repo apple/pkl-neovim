@@ -15,7 +15,7 @@
     limitations under the License.
 
 ]]
--- Verification harness for issue #74 (run with: nvim --headless -l scripts/verify_configuration.lua)
+-- Verification harness for issue #74 (run with: make test)
 -- Captures the settings table that pkl-neovim passes to vim.lsp.start(), then feeds it
 -- through Neovim's REAL default workspace/configuration handler for the four sections
 -- that pkl-lsp requests, and asserts every configured value is returned.
