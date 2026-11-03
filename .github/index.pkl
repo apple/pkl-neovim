@@ -19,8 +19,8 @@ amends "@pkl.impl.ghactions/PklCI.pkl"
 import "@com.github.actions/context.pkl"
 import "@pkl.impl.ghactions/jobs/HawkeyeCheck.pkl"
 
-// see https://launchpad.net/ubuntu/+source/neovim for available versions
-local NEOVIM_VERSION = "0.12.4-1"
+// see https://packages.ubuntu.com/search?keywords=neovim&searchon=names&suite=resolute&section=all for available versions
+local NEOVIM_VERSION = "0.12.6"
 
 triggerDocsBuild = "release"
 
@@ -43,14 +43,15 @@ main {
       steps {
         module.catalog.`actions/checkout@v6`
         new {
-          name = "Install Neovim"
+          name = "Setup Neovim"
           env {
             ["NEOVIM_VERSION"] = NEOVIM_VERSION
           }
           run =
             #"""
-            sudo apt-get update
-            sudo apt-get install -y neovim="${NEOVIM_VERSION}"
+            curl -LO https://github.com/neovim/neovim/releases/v"$NEOVIM_VERSION"/download/nvim-linux-x86_64.tar.gz
+            tar -C . -xzf nvim-linux-x86_64.tar.gz
+            echo "$PWD/nvim-linux-x86_64/bin" >> "$GITHUB_PATH"
             """#
         }
         new {

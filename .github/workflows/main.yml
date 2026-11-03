@@ -31,11 +31,12 @@ jobs:
     - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
       with:
         persist-credentials: false
-    - name: Install Neovim
+    - name: Setup Neovim
       env:
-        NEOVIM_VERSION: 0.12.4-1
+        NEOVIM_VERSION: 0.12.6
       run: |-
-        sudo apt-get update
-        sudo apt-get install -y neovim="${NEOVIM_VERSION}"
+        curl -LO https://github.com/neovim/neovim/releases/v"$NEOVIM_VERSION"/download/nvim-linux-x86_64.tar.gz
+        tar -C . -xzf nvim-linux-x86_64.tar.gz
+        echo "$PWD/nvim-linux-x86_64/bin" >> "$GITHUB_PATH"
     - name: Run tests
       run: make test
