@@ -19,6 +19,8 @@ amends "@pkl.impl.ghactions/PklCI.pkl"
 import "@com.github.actions/context.pkl"
 import "@pkl.impl.ghactions/jobs/HawkeyeCheck.pkl"
 
+local NEOVIM_VERSION = "0.12.6"
+
 triggerDocsBuild = "release"
 
 testReports {
@@ -38,18 +40,20 @@ main {
     ["test"] {
       `runs-on` = "ubuntu-latest"
       steps {
-        new {
-          uses = "actions/checkout@v6"
-          `with` {
-            ["persist-credentials"] = false
+        (module.catalog.`actions/checkout@v6`) {
+          with {
+            `persist-credentials` = false
           }
         }
         new {
           name = "Install Neovim"
+          env {
+            ["NEOVIM_VERSION"] = NEOVIM_VERSION
+          }
           run =
             #"""
             sudo apt-get update
-            sudo apt-get install -y neovim
+            sudo apt-get install -y neovim="${NEOVIM_VERSION}"
             """#
         }
         new {
