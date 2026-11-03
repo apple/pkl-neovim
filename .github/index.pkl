@@ -41,11 +41,7 @@ main {
     ["test"] {
       `runs-on` = "ubuntu-latest"
       steps {
-        (module.catalog.`actions/checkout@v6`) {
-          with {
-            `persist-credentials` = false
-          }
-        }
+        module.catalog.`actions/checkout@v6`
         new {
           name = "Install Neovim"
           env {
