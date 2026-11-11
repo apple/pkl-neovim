@@ -1,13 +1,16 @@
 = Installation
 
 :uri-neovim: https://neovim.io
-:uri-nvim-treesitter: https://github.com/nvim-treesitter/nvim-treesitter
+:uri-tree-sitter-manager: https://github.com/romus204/tree-sitter-manager.nvim
 :uri-vim-plug: https://github.com/junegunn/vim-plug
 :uri-homebrew: https://brew.sh
 
-This plugin requires {uri-neovim}[Neovim] version 0.11 or higher.
+This plugin requires {uri-neovim}[Neovim] version 0.12 or higher. It uses
+Neovim's built-in Tree-sitter support.
 
-Install {uri-nvim-treesitter}[nvim-treesitter] alongside this plugin using your favorite plugin manager.
+{uri-tree-sitter-manager}[tree-sitter-manager.nvim] is optional but recommended
+for installing the Pkl parser. The example below uses it as a separate plugin,
+not as a pkl-neovim dependency.
 
 Here is a sample `+init.vim+` file using {uri-vim-plug}[vim-plug].
 To complete the setup, you will need to run `+:PlugInstall+`, then restart neovim.
@@ -15,24 +18,23 @@ To complete the setup, you will need to run `+:PlugInstall+`, then restart neovi
 [source,vim]
 ----
 call plug#begin()
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'romus204/tree-sitter-manager.nvim'
 Plug 'https://github.com/apple/pkl-neovim.git'
 call plug#end()
 
-" The below is required for enabling the tree-sitter syntax engine, which is used by pkl-neovim.
 lua <<EOF
-local hasConfigs, configs = pcall(require, "nvim-treesitter.configs")
-if hasConfigs then
-  configs.setup {
-    ensure_installed = "pkl",
-    highlight = {
-      enable = true,              -- false will disable the whole extension
+require("tree-sitter-manager").setup {
+  ensure_installed = { "pkl" },
+  languages = {
+    pkl = {
+      install_info = {
+        url = "https://github.com/apple/tree-sitter-pkl.git",
+        revision = "v0.20.0",
+        queries = "queries",
+      },
     },
-    indent = {
-      enable = true
-    }
-  }
-end
+  },
+}
 EOF
 ----
 
